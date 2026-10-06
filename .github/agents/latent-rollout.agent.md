@@ -30,9 +30,18 @@ Before writing code, read neighbouring modules and mirror them. Specifically:
 - Every new Python file starts with the Anemoi copyright/licence header copied from an existing file (holder: "Anemoi contributors", Apache 2.0).
 - Use `LOG = logging.getLogger(__name__)` (match the module convention); no `print`, no `log.warn`, no blanket `# noqa`.
 
+**Verbosity (match anemoi-core exactly)**
+- Match the comment and docstring density of anemoi-core and the surrounding anemoi-inference code. When in doubt, write less.
+- No narrative comments: do not explain what the next line does, restate the code, describe your reasoning, or reference the plan, phases, "we", "now", "new", or "added for latent rollout".
+- Comments only where anemoi-core itself would use them: non-obvious math, tensor shape annotations, device/precision caveats, or a `TODO` with a concrete reason.
+- Docstrings: concise NumPy style as in existing modules — one-line summary, `Parameters`, `Returns`; no long prose, examples, or design essays.
+- Log messages: brief and factual, at the same levels existing runners use.
+- Keep design rationale in the PR description and `plan_latent_rollout.md`, not in code.
+
 **Tests & docs**
 - Add pytest tests mirroring existing runner tests and fixtures (use small/mock checkpoints as existing tests do); existing tests must keep passing.
-- Document the new runner and config options in `docs/` following existing page structure (sphinx-lint must pass).
+- Tests follow the same verbosity rules: descriptive test names, no narrative comments.
+- Document the new runner and config options in `docs/` following existing page structure and length (sphinx-lint must pass).
 
 **Commits & PRs**
 - Conventional Commits (`feat(runner): ...`, `fix: ...`, `docs: ...`, `test: ...`) — required by release-please. Do not edit `CHANGELOG.md` or version files manually.
